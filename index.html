@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="bn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>তারা সেবা - কৌশিকী অমাবস্যা 2025 </title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <style>
+        .input-focus:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(99,102,241,0.08);
+            border-color: rgba(99,102,241,0.8);
+        }
+        @media (max-width: 640px) {
+            .mobile-sticky {
+                position: sticky;
+                bottom: 0;
+                z-index: 40;
+                padding-bottom: env(safe-area-inset-bottom);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-b from-amber-50 to-white min-h-screen text-slate-800">
+
+    <div class="max-w-3xl mx-auto p-6">
+
+        <header class="flex items-center gap-4 mb-4">
+            <div class="w-16 h-16 rounded-full flex items-center justify-center shadow-lg overflow-hidden">
+                <img src="https://i.postimg.cc/nc47s1WH/Picsart-25-08-13-08-50-19-974-2.jpg" alt="তারা সেবা লোগো" class="w-full h-full object-cover">
+            </div>
+
+            <div>
+                <h1 class="text-2xl sm:text-3xl font-extrabold">তারা সেবা</h1>
+                <p class="text-amber-700 mt-1 font-medium">কৌশিকী অমাবস্যা 2025 পুজো</p>
+            </div>
+        </header>
+
+        <section class="bg-white rounded-2xl shadow p-5 mb-4">
+            <p class="text-sm text-slate-600">
+                স্বাগতম! নিচ থেকে আপনার পছন্দের মহা কৌশিকী অমাবস্যা পুজো নির্বাচন করুন। পরবর্তী ধাপে আপনার ১-৫ জন ব্যক্তির নাম ও গোত্র দেওয়ার অপশন আসবে এবং তারপর পেমেন্ট করতে পারবেন।
+            </p>
+        </section>
+
+        <section class="bg-white rounded-2xl shadow p-5 mb-4">
+            <label class="block text-sm font-medium text-slate-700 mb-2">মহা কৌশিকী অমাবস্যা পুজো নির্বাচন করুন:</label>
+            <select id="pujaSelect" class="w-full border rounded-md p-3 input-focus" aria-label="পুজো নির্বাচন">
+                <option value="">-- কৌশিকী অমাবস্যা পুজো নির্বাচন করুন --</option>
+                <option value="puja1" data-price="751">স্পেশাল অঞ্জলী ও যজ্ঞাহুতি পূজা — ₹ 751/-</option>
+                <option value="puja2" data-price="1101">স্পেশাল সিঙ্গার অঞ্জলী ও যজ্ঞহুতি পূজা — ₹ 1101/-</option>
+                <option value="puja3" data-price="1601">স্পেশাল শীতল ভোগ নিবেদন সিঙ্গার — ₹ 1601/-</option>
+                <option value="puja4" data-price="2101">স্পেশাল মধ্যাহ্ন ভোগ নিবেদন সিঙ্গার — ₹ 2101/-</option>
+            </select>
+
+            <div id="pujaDetails" class="mt-3 hidden">
+                <div class="prose prose-sm max-w-none text-slate-700">
+                    <h3 id="pujaTitle" class="text-lg font-semibold"></h3>
+                    <p id="pujaPrice" class="text-amber-600 font-bold"></p>
+                    <div id="pujaInclusions" class="mt-2 text-sm bg-amber-50 p-4 rounded-md border"></div>
+                    <div id="pujaCourier" class="mt-2 text-sm bg-white p-3 rounded-md border"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="membersSection" class="bg-white rounded-2xl shadow p-5 mb-4 hidden">
+            <h4 class="text-lg font-semibold mb-2">আপনাদের নাম ও গোত্র লিখুন</h4>
+            <p class="text-sm text-slate-600 mb-2">আপনি চাইলে ৫ জন পর্যন্ত নাম ও গোত্র লিখতে পারেন (কমপক্ষে একজনের নাম ও গোত্র লিখুন)</p>
+            <div id="membersContainer" class="space-y-2"></div>
+        </section>
+
+        <section id="addressSection" class="bg-white rounded-2xl shadow p-5 mb-4 hidden">
+            <h4 class="text-lg font-semibold mb-2">আপনার বাড়ির ঠিকানা লিখুন</h4>
+            <p class="text-sm text-slate-600 mb-2">প্রসাদ ও আশীর্বাদ বক্স কুরিয়ার করার জন্য সম্পূর্ণ ঠিকানা প্রয়োজন।</p>
+
+            <div class="space-y-3">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1" for="nameField">আপনার পুরো নাম <span class="text-red-500">*</span></label>
+                    <input type="text" id="nameField" class="w-full border rounded-md p-3 input-focus" placeholder="নাম" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1" for="contactField">যোগাযোগের ফোন নম্বর <span class="text-red-500">*</span></label>
+                    <input type="tel" id="contactField" class="w-full border rounded-md p-3 input-focus" placeholder="ফোন নম্বর" required pattern="[0-9]{10}">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1" for="villTownField">গ্রাম/শহর <span class="text-red-500">*</span></label>
+                    <input type="text" id="villTownField" class="w-full border rounded-md p-3 input-focus" placeholder="গ্রাম/শহর" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1" for="roadLaneField">রাস্তা/লেন</label>
+                    <input type="text" id="roadLaneField" class="w-full border rounded-md p-3 input-focus" placeholder="রাস্তা/লেন (ঐচ্ছিক)">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1" for="landmarkField">ল্যান্ডমার্ক <span class="text-red-500">*</span></label>
+                    <input type="text" id="landmarkField" class="w-full border rounded-md p-3 input-focus" placeholder="কাছাকাছি বিখ্যাত স্থান/ল্যান্ডমার্ক" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1" for="pinCodeField">পিন কোড <span class="text-red-500">*</span></label>
+                    <input type="text" id="pinCodeField" class="w-full border rounded-md p-3 input-focus" placeholder="ছয় অঙ্কের পিন কোড" required pattern="[0-9]{6}">
+                    <p id="pinError" class="text-sm text-red-500 mt-1 hidden">দয়া করে একটি সঠিক ৬-সংখ্যার পিন কোড দিন।</p>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1" for="stateField">রাজ্য <span class="text-red-500">*</span></label>
+                    <input type="text" id="stateField" class="w-full border rounded-md p-3 input-focus" placeholder="রাজ্য" required>
+                </div>
+            </div>
+
+            <div class="mt-3">
+                <label class="block text-sm font-medium text-slate-700 mb-1" for="whatsappField">আপনার হোয়াটসঅ্যাপ নম্বর লিখুন <span class="text-red-500">*</span></label>
+                <input type="tel" id="whatsappField" class="w-full border rounded-md p-3 input-focus" placeholder="আপনার হোয়াটসঅ্যাপ নম্বর লিখুন" required pattern="[0-9]{10}">
+                <p id="whatsappError" class="text-sm text-red-500 mt-1 hidden">দয়া করে একটি সঠিক ১০-সংখ্যার হোয়াটসঅ্যাপ নম্বর দিন।</p>
+            </div>
+        </section>
+
+        <div id="paymentArea" class="hidden">
+            <div class="bg-white rounded-2xl shadow p-5 mb-4">
+                <p class="text-sm text-slate-700 mb-3">সমস্ত ফাঁকা জায়গা গুলি পূরণ করার পরে নিচে পেমেন্ট করে পুজো পাঠান।</p>
+                <button id="payBtn" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-semibold py-3 rounded-md">
+                    পেমেন্ট করুন ও পুজো পাঠানোর প্রক্রিয়া সম্পূর্ণ করুন
+                </button>
+                <p class="text-xs text-slate-500 mt-2">Secure & Veryfi Pament Gateway-Razorpay</p>
+            </div>
+        </div>
+
+        <div id="messageArea" class="mb-4"></div>
+
+        <footer class="text-center text-xs text-slate-500 mt-4">
+            © 2025 তাঁরা সেৱা - তারাপীঠ, তাঁরা সেৱা
+        </footer>
+
+    </div>
+
+    <script>
+        /* -----------------------------
+         Puja data (বাংলায়)
+         ----------------------------- */
+        const pujaData = {
+            puja1: { title: "স্পেশাল অঞ্জলী ও যজ্ঞাহুতি পূজা", price: 751, inclusions: `
+                <p>কৌশিকী অমাবস্যার তাঁরা মায়ের বিশেষ পূজা। এই পূজায় আপনাদের নাম, গোত্র এবং সংকল্প অনুসারে পূজা করা হবে। যা আপনার এবং আপনার পরিবারের সুখ ও সমৃদ্ধির জন্য নিবেদন করা হবে। একাধিক ব্রাহ্মণ দ্বারা মন্ত্র পাঠ ও হোম যজ্ঞ করা হবে। শত্রুদমন, বাধা নিবারণ এবং সার্বিক সুরক্ষার জন্য অত্যন্ত ফলদায়ক। পূজার পর বিশেষ প্রার্থনা করা হবে। সাথে থাকবে মঙ্গলদীপ প্রজ্জ্বলন ও আপনাকে প্রসাদ পাঠানোর ব্যবস্থা।</p>
+                <strong>পুজোর উপকরণ:</strong>
+                <ul><li>১) আপনার নাম ও গোত্র</li><li>২) ফুল, সিঁদুর, আলতা, সুগন্ধী তেল</li><li>৩) পেঁড়া ও ফল</li><li>৪) ধাগা, চূড়নী</li><li>৫) কারণ (মদ)</li><li>৬) যোগ্যার সরঞ্জাম এবং অন্যান্য সামগ্রী</li></ul>
+            `, courier: `
+                <strong>আপনার বাড়িতে যা পৌঁছাবে (কুরিয়ারে):</strong>
+                <ol><li>মা তারার ছবি</li><li>শুকনো প্রসাদ</li><li>পুজোর চূড়নী ও ধাগা</li><li>পুষ্প আশীর্বাদ</li><li>যজ্ঞ তিলক ও সিঁদুর তিলক</li><li>কারণ প্রসাদ (মদ)</li><li>মিষ্টি/পেঁড়া (শুকনো) এবং অন্যান্য সামগ্রী</li></ol>
+            ` },
+            puja2: { title: "স্পেশাল সিঙ্গার অঞ্জলী ও যজ্ঞহুতি পূজা", price: 1101, inclusions: `
+                <p>কৌশিকী অমাবস্যার তারা মায়ের বিশেষ পূজা। এই পূজায় আপনাদের নাম, গোত্র এবং সংকল্প অনুসারে পূজা করা হবে। যা আপনার এবং আপনার পরিবারের সুখ ও সমৃদ্ধির জন্য নিবেদন করা হবে। একাধিক ব্রাহ্মণ দ্বারা মন্ত্র পাঠ ও হোম যজ্ঞ করা হবে। শত্রুদমন, বাধা নিবারণ এবং সার্বিক সুরক্ষার জন্য অত্যন্ত ফলদায়ক। পূজার পর বিশেষ প্রার্থনা করা হবে। সাথে থাকবে মঙ্গলদীপ প্রজ্জ্বলন ও আপনাকে প্রসাদ পাঠানোর ব্যবস্থা।</p>
+                <strong>পুজোর উপকরণ:</strong>
+                <ul><li>১) আপনার নাম ও গোত্র</li><li>২) ফুল, সিঁদুর, আলতা, সুগন্ধী তেল</li><li>৩) পেঁড়া ও ফল</li><li>৪) ধাগা, চূড়নী</li><li>৫) কারণ (মদ)</li><li>৬) যোগ্যার সরঞ্জাম এবং অন্যান্য সামগ্রী</li></ul>
+            `, courier: `
+                <strong>আপনার বাড়িতে যা পৌঁছাবে (কুরিয়ারে):</strong>
+                <ol><li>মা তারার ছবি</li><li>শুকনো প্রসাদ</li><li>পুজোর চূড়নী ও ধাগা</li><li>পুষ্প আশীর্বাদ</li><li>যজ্ঞ তিলক ও সিঁদুর তিলক</li><li>কারণ প্রসাদ (মদ)</li><li>মিষ্টি/পেঁড়া (শুকনো) এবং অন্যান্য সামগ্রী</li></ol>
+            ` },
+            puja3: { title: "স্পেশাল শীতল ভোগ নিবেদন সিঙ্গার অঞ্জলী ও যজ্ঞহুতি পূজা", price: 1601, inclusions: `
+                <p>কৌশিকী অমাবস্যার পূর্ণ লগ্নে মা তারাকে শীতল ভোগ নিবেদন করা হবে। আপনার নাম, গোত্র এবং সংকল্প অনুসারে পূজা করা হবে। একাধিক ব্রাহ্মণ দ্বারা মন্ত্র পাঠ ও হোম যজ্ঞ করা হবে। শত্রুদমন, বাধা নিবারণ এবং সার্বিক সুরক্ষার জন্য অত্যন্ত ফলদায়ক। পূজার পর বিশেষ প্রার্থনা করা হবে। সাথে থাকবে মঙ্গলদীপ প্রজ্জ্বলন ও আপনাকে প্রসাদ পাঠানোর ব্যবস্থা।</p>
+                <strong>পুজোর উপকরণ:</strong>
+                <ul><li>১) আপনার নাম ও গোত্র</li><li>২) ফুল ও ১০৮ জবা ফুলের মালা, সিঁদুর, আলতা, সুগন্ধী তেল, অস্বগন্ধা</li><li>৩) পেঁড়া ও ফল</li><li>৪) ধাগা, চূড়নী</li><li>৫) কারণ (মদ)</li><li>৬) যোগ্যার সরঞ্জাম</li><li>৭) শীতল ভোগের পরাত নিবেদন এবং অন্যান্য সামগ্রী</li></ul>
+            `, courier: `
+                <strong>আপনার বাড়িতে যা পৌঁছাবে (কুরিয়ারে):</strong>
+                <ol><li>মা তারার ছবি (বড়)</li><li>শুকনো প্রসাদ</li><li>পুজোর চূড়নী ও ধাগা</li><li>আশীর্বাদ</li><li>যজ্ঞ তিলক ও সিঁদুর তিলক ও অস্বাগন্ধা</li><li>কারণ প্রসাদ (মদ)</li><li>মিষ্টি (শুকনো)</li><li>মা তারার লকেট (পেনডেন্ট) এবং অন্যান্য সামগ্রী</li></ol>
+            ` },
+            puja4: { title: "স্পেশাল মধ্যাহ্ন ভোগ নিবেদন সিঙ্গার অঞ্জলী ও যজ্ঞহুতি পূজা", price: 2101, inclusions: `
+                <p>কৌশিকী অমাবস্যার পূর্ণ লগ্নে মধ্যাহ্ন ভোগ নিবেদন করা হবে। আপনার নাম, গোত্র এবং সংকল্প অনুসারে পূজা করা হবে। একাধিক ব্রাহ্মণ দ্বারা মন্ত্র পাঠ ও হোম যজ্ঞ করা হবে। শত্রুদমন, বাধা নিবারণ এবং সার্বিক সুরক্ষার জন্য অত্যন্ত ফলদায়ক। পূজার পর বিশেষ প্রার্থনা করা হবে। সাথে থাকবে মঙ্গলদীপ প্রজ্জ্বলন ও আপনাকে প্রসাদ পাঠানোর ব্যবস্থা।</p>
+                <strong>পুজোর উপকরণ:</strong>
+                <ul><li>১) আপনার নাম ও গোত্র</li><li>২) ফুল ও ১০৮ জবা ও অপরাজিতা ফুলের মালা, সিঁদুর, আলতা, সুগন্ধী তেল, অস্বগন্ধা</li><li>৩) পেঁড়া ও ফল</li><li>৪) ধাগা, চূড়নী</li><li>৫) কারণ (মদ)</li><li>৬) যোগ্যার সরঞ্জাম</li><li>৭) মধ্যান্য ভোগের পড়াত নিবেদন এবং অন্যান্য সামগ্রী</li></ul>
+            `, courier: `
+                <strong>আপনার বাড়িতে যা পৌঁছাবে (কুরিয়ারে):</strong>
+                <ol><li>মা তারার ছবি (বড়)</li><li>শুকনো প্রসাদ</li><li>পুজোর চূড়নী ও ধাগা</li><li>আশীর্বাদ</li><li>যজ্ঞ তিলক ও সিঁদুর তিলক ও অস্বাগন্ধা</li><li>কারণ প্রসাদ (মদ)</li><li>মিষ্টি (শুকনো)</li><li>মা তারার লকেট (পেনডেন্ট) এবং অন্যান্য সামগ্রী</li></ol>
+            ` }
+        };
+
+        /* -----------------------------
+         Configuration
+         ----------------------------- */
+        const RAZORPAY_KEY = "a1b2c3d4e5f6g7";
+        const GOOGLE_SHEET_WEBAPP = "https://script.google.com/macros/s/AKfycby0kU6jqshwpoSr9Cl3esuP8KHybYREAS2fIm7TvowD6sk0YSnhA7wXOMEa09jypHweyQ/exec";
+
+        /* -----------------------------
+         DOM references
+         ----------------------------- */
+        const pujaSelect = document.getElementById('pujaSelect');
+        const pujaDetails = document.getElementById('pujaDetails');
+        const pujaTitle = document.getElementById('pujaTitle');
+        const pujaPrice = document.getElementById('pujaPrice');
+        const pujaInclusions = document.getElementById('pujaInclusions');
+        const pujaCourier = document.getElementById('pujaCourier');
+
+        const membersSection = document.getElementById('membersSection');
+        const membersContainer = document.getElementById('membersContainer');
+
+        // New address field references
+        const addressSection = document.getElementById('addressSection');
+        const nameField = document.getElementById('nameField');
+        const contactField = document.getElementById('contactField');
+        const villTownField = document.getElementById('villTownField');
+        const roadLaneField = document.getElementById('roadLaneField');
+        const landmarkField = document.getElementById('landmarkField');
+        const pinCodeField = document.getElementById('pinCodeField');
+        const stateField = document.getElementById('stateField');
+
+        const whatsappField = document.getElementById('whatsappField');
+        const whatsappError = document.getElementById('whatsappError');
+        const pinError = document.getElementById('pinError'); // New pin error span
+
+        const paymentArea = document.getElementById('paymentArea');
+        const payBtn = document.getElementById('payBtn');
+        const messageArea = document.getElementById('messageArea');
+
+        /* -----------------------------
+         Create 5 member rows
+         ----------------------------- */
+        function createMemberRows() {
+            membersContainer.innerHTML = '';
+            for (let i = 1; i <= 5; i++) {
+                const div = document.createElement('div');
+                div.className = 'grid grid-cols-1 sm:grid-cols-3 gap-2 items-center';
+                div.innerHTML = `
+                    <label class="text-sm text-slate-600">নাম ${i}</label>
+                    <input type="text" id="member_name_${i}" class="sm:col-span-2 border rounded-md p-2 input-focus" placeholder="পুরো নাম (যদি নেই, ফাঁকা রাখুন)">
+                    <label class="text-sm text-slate-600 mt-2 sm:mt-0">গোত্র ${i}</label>
+                    <input type="text" id="member_gotra_${i}" class="sm:col-span-2 border rounded-md p-2 input-focus" placeholder="গোত্র লিখুন (যদি নেই, ফাঁকা রাখুন)">
+                `;
+                membersContainer.appendChild(div);
+            }
+        }
+        createMemberRows();
+
+        /* -----------------------------
+         Handle puja selection change
+         ----------------------------- */
+        pujaSelect.addEventListener('change', (e) => {
+            const val = e.target.value;
+            clearMessage();
+            if (!val) {
+                pujaDetails.classList.add('hidden');
+                membersSection.classList.add('hidden');
+                addressSection.classList.add('hidden');
+                paymentArea.classList.add('hidden');
+                return;
+            }
+            const p = pujaData[val];
+            pujaTitle.innerHTML = p.title;
+            pujaPrice.innerHTML = `মূল্য: ₹${p.price}`;
+            pujaInclusions.innerHTML = p.inclusions;
+            pujaCourier.innerHTML = p.courier;
+
+            pujaDetails.classList.remove('hidden');
+            membersSection.classList.remove('hidden');
+            addressSection.classList.remove('hidden');
+            paymentArea.classList.remove('hidden');
+            pujaDetails.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+
+        /* -----------------------------
+         Form collection & helpers
+         ----------------------------- */
+        function collectFormData() {
+            const selectedKey = pujaSelect.value;
+            const puja = pujaData[selectedKey];
+            const members = [];
+            for (let i = 1; i <= 5; i++) {
+                const name = document.getElementById(`member_name_${i}`).value.trim();
+                const gotra = document.getElementById(`member_gotra_${i}`).value.trim();
+                if (name || gotra) members.push({ name: name || "-", gotra: gotra || "-" });
+            }
+            const name = nameField.value.trim();
+            const contact = contactField.value.trim();
+            const villTown = villTownField.value.trim();
+            const roadLane = roadLaneField.value.trim();
+            const landmark = landmarkField.value.trim();
+            const pinCode = pinCodeField.value.trim();
+            const state = stateField.value.trim();
+            const whatsapp = whatsappField.value.trim();
+
+            // Combine address fields into a single string for display/storage
+            const address = `নাম: ${name}, ফোন: ${contact}, ঠিকানা: ${roadLane ? roadLane + ", " : ""}${villTown}, ল্যান্ডমার্ক: ${landmark}, পিন: ${pinCode}, রাজ্য: ${state}`;
+
+            return { pujaKey: selectedKey, pujaTitle: puja ? puja.title : '', amountINR: puja ? puja.price : 0, members, whatsapp, address, name, contact, villTown, roadLane, landmark, pinCode, state };
+        }
+
+        function showMessage(text, type = 'info') {
+            const colors = { info: 'bg-blue-50 border-blue-200 text-blue-800', success: 'bg-green-50 border-green-200 text-green-800', error: 'bg-red-50 border-red-200 text-red-800' };
+            messageArea.innerHTML = `<div class="p-4 rounded-md border ${colors[type]}"><div class="text-sm">${text}</div></div>`;
+            messageArea.scrollIntoView({ behavior: 'smooth' });
+        }
+        function clearMessage() { messageArea.innerHTML = ''; }
+
+        function isValidIndianMobile(number) {
+            const mobileRegex = /^[6-9]\d{9}$/;
+            return mobileRegex.test(number);
+        }
+
+        function isValidPinCode(pin) {
+            const pinRegex = /^[0-9]{6}$/;
+            return pinRegex.test(pin);
+        }
+
+        /* -----------------------------
+         Post to Google Sheet
+         ----------------------------- */
+        async function postToGoogleSheet(payload) {
+            try {
+                const formData = new FormData();
+                for (const key in payload) {
+                    if (typeof payload[key] === 'object' && payload[key] !== null) {
+                        formData.append(key, JSON.stringify(payload[key]));
+                    } else {
+                        formData.append(key, payload[key]);
+                    }
+                }
+                const res = await fetch(GOOGLE_SHEET_WEBAPP, {
+                    method: 'POST',
+                    body: formData
+                });
+                return res.ok;
+            } catch (err) {
+                console.error('Google Sheet POST error:', err);
+                return false;
+            }
+        }
+
+        /* -----------------------------
+         Razorpay integration
+         ----------------------------- */
+        async function openRazorpayCheckout(formData) {
+            const amountPaise = formData.amountINR * 100;
+            const options = {
+                key: RAZORPAY_KEY,
+                amount: amountPaise,
+                currency: "INR",
+                name: "তারা সেবা — কৌশিকী অমাবস্যা 2025",
+                description: formData.pujaTitle,
+                prefill: { name: formData.name, email: "", contact: formData.whatsapp || "" },
+                notes: { puja: formData.pujaTitle, name: formData.name, contact: formData.contact, address: formData.address, whatsapp: formData.whatsapp || "" },
+                theme: { color: "#c2410c" },
+                handler: async function (response) {
+                    showMessage("আপনার কৌশিকী অমাবস্যার পূজো সফলভাবে পাঠানো হয়েছে। খুব শিগগিরই আমরা আপনার সাথে যোগাযোগ করবো এবং পূজো সম্পন্ন হওয়ার পর আপনার প্রসাদ ও আশীর্বাদ বক্স আপনার দেওয়া ঠিকানায় কুরিয়ার করা হবে ।", "success");
+                    const payload = { status: "success", puja: formData.pujaTitle, amount: formData.amountINR, payment_id: response.razorpay_payment_id || "", razorpay_signature: response.razorpay_signature || "", members: JSON.stringify(formData.members), name: formData.name, contact: formData.contact, address: formData.address, whatsapp: formData.whatsapp || "", timestamp: new Date().toISOString() };
+                    const ok = await postToGoogleSheet(payload);
+                    if (!ok) showMessage("পেমেন্ট সফল হয়েছে, তবে রেকর্ড গুগল শীটে সংরক্ষিত হয়নি। অ্যাডমিনকে জানান।", "error");
+                },
+                modal: {
+                    ondismiss: async function () {
+                        showMessage("পেমেন্ট বাতিল বা ব্যর্থ হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।", "error");
+                        const payload = { status: "failed", puja: formData.pujaTitle, amount: formData.amountINR, payment_id: "", razorpay_error: "user_dismissed_or_failed", members: JSON.stringify(formData.members), name: formData.name, contact: formData.contact, address: formData.address, whatsapp: formData.whatsapp || "", timestamp: new Date().toISOString() };
+                        await postToGoogleSheet(payload);
+                    }
+                }
+            };
+            const rzp = new Razorpay(options);
+            rzp.open();
+        }
+
+        /* -----------------------------
+         Pay button click
+         ----------------------------- */
+        payBtn.addEventListener('click', async () => {
+            clearMessage();
+            const formData = collectFormData();
+
+            // --- Validation Checks (Mandatory & Correct Format) ---
+            if (!formData.pujaKey) { showMessage("দয়া করে একটি পুজো নির্বাচন করুন।", "error"); return; }
+            if (!formData.members || formData.members.length === 0) { showMessage("দয়া করে অন্তত একজনের নাম ও গোত্র লিখুন।", "error"); return; }
+            if (!formData.name) { showMessage("দয়া করে আপনার সম্পূর্ণ ঠিকানা দিন।", "error"); return; }
+            if (!formData.contact) { showMessage("দয়া করে যোগাযোগের ফোন নম্বর দিন।", "error"); return; }
+            if (!formData.villTown) { showMessage("দয়া করে গ্রাম/শহর দিন।", "error"); return; }
+            if (!formData.landmark) { showMessage("দয়া করে ল্যান্ডমার্ক দিন।", "error"); return; }
+            if (!formData.pinCode) { showMessage("দয়া করে পিন কোড দিন।", "error"); return; }
+            if (!isValidPinCode(formData.pinCode)) {
+                showMessage("দয়া করে একটি সঠিক ৬-সংখ্যার পিন কোড দিন।", "error");
+                pinError.textContent = "দয়া করে একটি সঠিক ৬-সংখ্যার পিন কোড দিন।";
+                pinError.classList.remove('hidden');
+                return;
+            } else {
+                pinError.classList.add('hidden');
+            }
+            if (!formData.state) { showMessage("দয়া করে রাজ্য দিন।", "error"); return; }
+
+            const whatsappNo = formData.whatsapp;
+            if (!whatsappNo) {
+                showMessage("যোগাযোগের জন্য একটি হোয়াটসঅ্যাপ নম্বর দিন।", "error");
+                whatsappError.textContent = "দয়া করে একটি হোয়াটসঅ্যাপ নম্বর দিন।";
+                whatsappError.classList.remove('hidden');
+                return;
+            } else if (!isValidIndianMobile(whatsappNo)) {
+                showMessage("দয়া করে একটি সঠিক ১০-সংখ্যার হোয়াটসঅ্যাপ নম্বর দিন (শুরু হয় ৬, ৭, ৮ বা ৯ দিয়ে)।", "error");
+                whatsappError.textContent = "দয়া করে একটি সঠিক ১০-সংখ্যার হোয়াটসঅ্যাপ নম্বর দিন।";
+                whatsappError.classList.remove('hidden');
+                return;
+            } else {
+                whatsappError.classList.add('hidden');
+            }
+
+            const confirmMsg = `আপনি কৌশিকী অমাবস্যার পুজোর জন্য'${formData.pujaTitle}' (₹${formData.amountINR}) পেমেন্ট করতে যাচ্ছেন। চালিয়ে যেতে চান?`;
+            if (!confirm(confirmMsg)) return;
+
+            try {
+                await postToGoogleSheet({
+                    status: "initiated",
+                    puja: formData.pujaTitle,
+                    amount: formData.amountINR,
+                    payment_id: "",
+                    members: JSON.stringify(formData.members),
+                    name: formData.name,
+                    contact: formData.contact,
+                    address: formData.address,
+                    whatsapp: formData.whatsapp || "",
+                    timestamp: new Date().toISOString()
+                });
+            } catch (e) {
+                console.error("Initial save to Google Sheet failed", e);
+            }
+
+            showMessage("Razorpay পেমেন্ট পপ-আপ লোড হচ্ছে... অনুগ্রহ করে পপ-আপটি বন্ধ করবেন না।", "info");
+            try {
+                await openRazorpayCheckout(formData);
+            } catch (err) {
+                console.error('Razorpay error:', err);
+                showMessage("পেমেন্টে ত্রুটি হয়েছে। পরে আবার চেষ্টা করুন।", "error");
+                const payload = { status: "failed", puja: formData.pujaTitle, amount: formData.amountINR, payment_id: "", razorpay_error: err && err.message ? err.message : "unknown_error", members: JSON.stringify(formData.members), name: formData.name, contact: formData.contact, address: formData.address, whatsapp: formData.whatsapp || "", timestamp: new Date().toISOString() };
+                await postToGoogleSheet(payload);
+            }
+        });
+    </script>
+</body>
+</html>
